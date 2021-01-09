@@ -27,6 +27,7 @@ const advanceRound = () => {
     currentRoundNumber++;
 }
 
+//checks:
 //const ex1 =generateTarget();
 //console.log(ex1);
 //console.log(compareGuesses(7,9,ex1));
