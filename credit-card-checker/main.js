@@ -24,11 +24,42 @@ const batch = [valid1, valid2, valid3, valid4, valid5, invalid1, invalid2, inval
 
 
 // Add your functions below:
+const validateCred = array => {
+    let sum=0;
+    let j=1;
+    let len = array.length;
+    for(let i = len-1;i>=0;i--){
+        if(j%2 ==0){
+            let elem = array[i]*2;
+            if(elem>9) elem-=9;
+            sum+=elem;
+        } 
+        else{
+            sum+=array[i];
+        }
+        j++;
+    }
+    return sum%10 == 0;
+}
 
+const findInvalidCards = arr =>{
+    return arr.map(elem => validateCred(elem) );
+}
 
+const idInvalidCardCompanies = arr =>{
+    let tab = {3:"Amex (American Express)",4:"Visa",5:"Mastercard",6:"Discover"};
+    let ret = [];
+    for (i in arr){
+        let val = validateCred(arr[i]);
+        if (!val){
+            let company =tab[arr[i][0]];
+            if (company==undefined) company = "Company not found";
+            ret.push(company);
+        }
+    }
+    return ret.filter((elem,idx)=>ret.indexOf(elem) == idx);
+}
 
-
-
-
-
+console.log(findInvalidCards(batch));
+console.log(idInvalidCardCompanies(batch));
 
